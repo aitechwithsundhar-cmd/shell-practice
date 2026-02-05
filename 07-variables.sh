@@ -1,8 +1,10 @@
 #!/bin/bash
 #dynamic command 
 
-START_TIME=$(date)
+START_TIME=$(date +%s)
 
-echo "scripit executed at: $TIMESTAMP"
+echo "scripit executed at: $START_TIME"
 sleep 10
-END_TIME=$(date)
+END_TIME=$(date+%s)
+TOTAL_time=$(($END_TIME-$START_TIME))
+echo "script executed in:$"
