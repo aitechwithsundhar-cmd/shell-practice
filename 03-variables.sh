@@ -3,8 +3,8 @@ PERSON1=modi # no space between value and =
 PERSON2=trumph 
 
 
-echo "suresh:: hello ramesh, how are you?"
-echo "ramesh:: hi suresh, i am fine thanks for asking. how are you doing?"
-echo "suresh:: am doing great. what are you learning ramesh?"
-echo "ramesh:: am leraning DevOps, what about you suresh?"
-echo "suresh:: am learning linux commands and shell scripting"
+echo "$PERSON1:: hello $PERSON2, how are you?"
+echo "$PERSON2:: hi $PERSON1, i am fine thanks for asking. how are you doing?"
+echo "$PERSON1:: am doing great. what are you learning $PERSON2?"
+echo "$PERSON2:: am leraning DevOps, what about you $PERSON1?"
+echo "$PERSON1:: am learning linux commands and shell scripting"
