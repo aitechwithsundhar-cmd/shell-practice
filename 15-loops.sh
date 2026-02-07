@@ -33,6 +33,13 @@ VALIDATE() {
 
 for package in "$@" #sudo sh 15-loops.sh <package name>
 do 
-    dnf install $package -y &>>$LOGS_FILE
-    VALIDATE $? "$package installation"
+    dnf list instyalled $package &>>$LOGS_FILE
+    if [ $? -ne 0 ]; then
+        echo "$package not installed, install now"
+        dnf install $package -y &>>$LOGS_FILE
+        VALIDATE $? "$package installation"
+    else 
+        echo "$package already installed, skipping"
+        
+    fi
 done 
