@@ -31,7 +31,7 @@ VALIDATE() {
     fi
 }
 
-for $package is "$@" #sudo sh 15-loops.sh <package name>
+for package is "$@" #sudo sh 15-loops.sh <package name>
 do 
     dnf install $package -y &>>$LOGS_FILE
     VALIDATE $? "$package installation"
