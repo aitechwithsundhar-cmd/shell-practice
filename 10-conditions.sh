@@ -8,10 +8,10 @@ number=$1
 # -eq -> equal 
 # -ne -> not equal
 
-if [ $number -gt 20 ]; then 
+if [ "$number" -gt 20 ]; then 
     echo "given number: $number is greater then 20"
 
-elif [ $numeber -eq 20 ]; then 
+elif [ "$numeber" -eq 20 ]; then 
     echo "given number: $number is equal to 20"
 
 else 
