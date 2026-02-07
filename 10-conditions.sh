@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-number=$25 
+number=$1 
 
 # -gt -> greater than
 # -lt -> less then 
@@ -9,5 +9,5 @@ number=$25
 # -ne -> not equal
 
 if [$number -gt 20]; then 
-    echo "given number: $number is greater then 25"
+    echo "given number: $number is greater then 20"
 fi     
