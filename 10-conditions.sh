@@ -5,6 +5,12 @@
 # -eq -> equal
 # -ne -> not equal
 
+number=$1
+
+if [[ -z $number ]]; then
+    echo "please provide a number"
+    exit 1
+fi
 
 if [[ $number -gt 20 ]]; then
     echo "given number: $number is greater than 20"
