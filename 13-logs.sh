@@ -1,30 +1,48 @@
 #!/bin/bash
 
-#functions/methods 
-#functions are intended to complete specific task, it takes input and does the job 
+############################################
+# Script Name  : 13-logs.sh
+# Purpose      : Install packages with logs
+# Author       : Sundhar
+############################################
 
 USERID=$(id -u)
+
 LOGS_FOLDER="/var/log/shell-script"
-LOGS_FILE="/var/log/shell-script/$0.sh"
+SCRIPT_NAME=$(basename "$0")
+LOGS_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 
-    if [ $USERID -ne 0 ]; then 
-        echo "please run this script with root user access" 
+# Check root access
+if [ $USERID -ne 0 ]; then
+    echo "Please run this script with root user access"
+    exit 1
+fi
+
+# Create logs folder
+mkdir -p "$LOGS_FOLDER"
+
+# Validation function
+VALIDATE() {
+    if [ $1 -ne 0 ]; then
+        echo "$2 .... FAILURE"
         exit 1
-    fi 
-mkdir -p $LOGS_FOLDER
-
-VALIDATE(){
-    if [ $1 -ne 0 ]; then 
-        echo "$2 .... faliure"
-    else 
-        echo "$2 .... sucess"
+    else
+        echo "$2 .... SUCCESS"
     fi
 }
-dnf install nginx -y &>> $LOGS_FILE
-VALIDATE $? "installing nginx"
 
-dnf install mysql -y &>> $LOGS_FILE
-VALIDATE $? "installing mysql"
+echo "Script started at: $(date)" | tee -a "$LOGS_FILE"
 
-dnf install nodejs -y &>> $LOGS_FILE
-VALIDATE $? "installing nodejs"
+# Install nginx
+dnf install nginx -y >> "$LOGS_FILE" 2>&1
+VALIDATE $? "Installing nginx"
+
+# Install mysql
+dnf install mysql -y >> "$LOGS_FILE" 2>&1
+VALIDATE $? "Installing mysql"
+
+# Install nodejs
+dnf install nodejs -y >> "$LOGS_FILE" 2>&1
+VALIDATE $? "Installing nodejs"
+
+echo "Script completed at: $(date)" | tee -a "$LOGS_FILE"
