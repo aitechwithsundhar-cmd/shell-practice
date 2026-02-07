@@ -4,8 +4,8 @@
 #functions are intended to complete specific task, it takes input and does the job 
 
 USERID=$(id -u)
-LOGS_FOLDER= "/var/log/shell-scrip"
-LOGS_FILE= "/var/log/shell-scrip/$0.log"
+LOGS_FOLDER="/var/log/shell-scrip"
+LOGS_FILE="/var/log/shell-scrip/$0.sh"
 
     if [ $USERID -ne 0 ]; then 
         echo "please run this script with root user access" 
