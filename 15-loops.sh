@@ -12,6 +12,12 @@ LOGS_FOLDER="/var/log/shell-script"
 SCRIPT_NAME=$(basename "$0")
 LOGS_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[34m"
+echo -e "$R Hello World $N, $G am lerning linux $N"
+
 # Check root access
 if [ $USERID -ne 0 ]; then
     echo "Please run this script with root user access" | tee -a $LOGS_FILE
