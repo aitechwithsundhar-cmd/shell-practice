@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############################################
-# Script Name  : 13-logs.sh
+# Script Name  : 15-loops.sh
 # Purpose      : Install packages with logs
 # Author       : Sundhar
 ############################################
@@ -12,15 +12,15 @@ LOGS_FOLDER="/var/log/shell-script"
 SCRIPT_NAME=$(basename "$0")
 LOGS_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 
-R="\e[31"
-G="\e[32"
-Y="\e[33"
+# Color codes
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
 N="\e[0m"
 
-
-# Check root access
+# Root check
 if [ $USERID -ne 0 ]; then
-    echo -e "${R} Please run this script with root user access ${N}" | tee -a $LOGS_FILE
+    echo -e "${R}Please run this script with root user access${N}"
     exit 1
 fi
 
@@ -30,22 +30,22 @@ mkdir -p "$LOGS_FOLDER"
 # Validation function
 VALIDATE() {
     if [ $1 -ne 0 ]; then
-        echo -e "$2 ....${R}FAILURE${N}" | tee -a $LOGS_FILE
+        echo -e "$2 .... ${R}FAILURE${N}"
         exit 1
     else
-        echo -e "$2 ....${G}SUCCESS${N}" | tee -a $LOGS_FILE
+        echo -e "$2 .... ${G}SUCCESS${N}"
     fi
 }
 
-for package in "$@" #sudo sh 15-loops.sh <package name>
-do 
-    dnf list instyalled $package &>>$LOGS_FILE
+# Loop through packages
+for package in "$@"
+do
+    dnf list installed "$package" &>>"$LOGS_FILE"
     if [ $? -ne 0 ]; then
-        echo "$package ${Y} not installed, install now ${N}"
-        dnf install $package -y &>>$LOGS_FILE
+        echo -e "${Y}$package not installed, installing now...${N}"
+        dnf install "$package" -y &>>"$LOGS_FILE"
         VALIDATE $? "$package installation"
-    else 
-        echo -e "$package ${G} already installed, skipping ${N}"
-        
+    else
+        echo -e "${G}$package already installed, skipping${N}"
     fi
-done 
+done
