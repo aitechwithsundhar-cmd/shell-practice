@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 set -e 
-trap 'echo "there is an error in $LINED, command:$BASH_COMMAND"'
+trap 'echo "there is an error in $LINENO, command:$BASH_COMMAND"' ERR
 
 
 USERID=$(id -u)
